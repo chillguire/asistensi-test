@@ -1,5 +1,4 @@
 /**
- * crear usuario
  * listar usuarios
  * ver detalles
  * actualizar detalles

@@ -4,6 +4,8 @@ const http = require('http').Server(app);
 
 const mongoose = require('mongoose');
 
+const { isLoggedIn } = require('./middleware/middleware');
+
 
 //** DB CONFIG
 const dbURL = process.env.DB_URL || 'mongodb://localhost:27017/asistensi-test-db';
@@ -26,7 +28,10 @@ app.use(express.json());
 
 
 //** ROUTES
-app.all('*', (req, res) => {
+const authRoutes = require('./routes/auth');
+app.use('/api/', authRoutes);
+
+app.all('*', isLoggedIn, (req, res) => {
 	res.sendStatus(404);
 });
 

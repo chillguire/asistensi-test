@@ -1,0 +1,10 @@
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+    "dni": "chillguire", 
+	"phoneNumber": "04242402340", 
+	"password": "123456",
+	"firstName": "Ricardo",
+	"lastName": "Avendaño"
+}
