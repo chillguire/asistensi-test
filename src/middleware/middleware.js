@@ -1,0 +1,1 @@
+//isLoggedIn func, basically
