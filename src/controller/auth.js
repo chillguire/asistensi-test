@@ -8,7 +8,7 @@ const errorHandling = require('../middleware/errorHandling');
 
 module.exports.create = errorHandling.catchAsyncError(async (req, res) => {
 	const { dni, phoneNumber, password, firstName, lastName, sex, status } = req.body;
-	const payload = {}
+	const payload = {};
 
 	// check whether req is appropiate
 	if (!(dni && phoneNumber && password && firstName && lastName)) {
@@ -38,6 +38,7 @@ module.exports.create = errorHandling.catchAsyncError(async (req, res) => {
 	});
 	await user.save();
 
+	// if req.user is defined, there's no need to create a new token
 	if (!req.user) {
 		const token = jwt.sign(
 			{

@@ -45,6 +45,7 @@ module.exports.updateUser = errorHandling.catchAsyncError(async (req, res) => {
 		throw new AppError(404, 'User does not exists');
 	}
 
+	// find differences between req.body and data saved in db
 	const forbiddenData = ['_id', "__v", "createdAt", "updatedAt"];
 	const updatedData = Object.keys(user._doc).reduce((diff, key) => {
 		if ((user[key] !== req.body[key]) && req.body[key] && user[key] && !forbiddenData.includes(key)) {
@@ -53,6 +54,7 @@ module.exports.updateUser = errorHandling.catchAsyncError(async (req, res) => {
 		return diff;
 	}, {});
 
+	// if there are differences, update it
 	if (Object.keys(updatedData).length > 0) {
 		// if dni or phoneNumber is changed, check that it is not registered already
 		if ((updatedData.dni || updatedData.phoneNumber)) {

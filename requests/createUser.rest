@@ -3,10 +3,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTNhY2IxODA0MjJmZTYzOTY5OTM0MiIsImlhdCI6MTYzODExNzM5NSwiZXhwIjoxNjM4NzIyMTk1fQ.PLAAKdf7YQE_t0m_SU1AyrqSovK1BpTRakPEnsRBFUo
 
 {
-    "dni": "12345678B", 
-	"phoneNumber": "1234", 
-	"password": "123456",
+    "dni": "12345678C", 
+	"phoneNumber": "12345678", 
+	"password": "1",
 	"firstName": "John",
-	"lastName": "Doe",
-	"sex": "Male"
+	"lastName": "Doe"
 }

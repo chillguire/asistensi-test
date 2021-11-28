@@ -30,11 +30,11 @@ module.exports.isValidId = (req, res, next) => {
 };
 
 const userSchema = Joi.object({
-	firstName: Joi.string().alphanum().min(3).max(30).trim(),
-	lastName: Joi.string().alphanum().min(3).max(30).trim(),
+	firstName: Joi.string().min(3).max(30).trim(),
+	lastName: Joi.string().min(3).max(30).trim(),
 	dni: Joi.string().length(9).pattern(new RegExp('^[0-9]{8,8}[A-Za-z]$')),
-	phoneNumber: Joi.string().max(15).pattern(/^[0-9]+$/),
-	password: Joi.string().alphanum().min(1),
+	phoneNumber: Joi.string().min(8).max(15).pattern(/^[0-9]+$/),
+	password: Joi.string().min(1),
 	sex: Joi.string().valid('Male', 'Female', 'Other'),
 	status: Joi.string().valid('Active', 'Inactive', 'Pending'),
 });
