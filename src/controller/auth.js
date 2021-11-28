@@ -83,7 +83,7 @@ module.exports.login = async (req, res) => {
 				{ dni: identifier },
 				{ phoneNumber: identifier }
 			]
-		});
+		}).select('password');
 		const isPasswordCorrect = user === null ? false : await bcrypt.compare(password, user.password);
 
 		if (!(user && isPasswordCorrect)) {

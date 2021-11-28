@@ -1,12 +1,11 @@
-PUT http://localhost:3000/api/users/61a2de9e3e61702465be5314
+PUT http://localhost:3000/api/users/61a36dc45289b1df0b563bd6
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTJhM2IyZDM4N2MzNzYyOTRiMDhhYyIsImlhdCI6MTYzODA0ODY5MCwiZXhwIjoxNjM4NjUzNDkwfQ.RFyzZmQAcyBTuNEqJL6Q1T2wzq7OFjiFs5uUhUuMhrc
 
 {
-    "dni": "chillguire5",
-	"phoneNumber": "042424023402", 
-	"password": "123456",
-	"firstName": "RicardoO",
-	"lastName": "Avendaño",
-	"status": "Active"
+    "dni": "test125",
+	"phoneNumber": "12345", 
+	"password": "1234567",
+	"firstName": "RicardoO152",
+	"lastName": "Avenda5ño",
 }

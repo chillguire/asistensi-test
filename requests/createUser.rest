@@ -3,8 +3,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTJhM2IyZDM4N2MzNzYyOTRiMDhhYyIsImlhdCI6MTYzODA0ODY5MCwiZXhwIjoxNjM4NjUzNDkwfQ.RFyzZmQAcyBTuNEqJL6Q1T2wzq7OFjiFs5uUhUuMhrc
 
 {
-    "dni": "chillguire2", 
-	"phoneNumber": "042424023402", 
+    "dni": "chillguire3", 
+	"phoneNumber": "042424023405", 
 	"password": "123456",
 	"firstName": "Ricardo",
 	"lastName": "Avendaño"

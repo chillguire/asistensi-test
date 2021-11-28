@@ -1,6 +1,7 @@
 const User = require('../models/user');
 
-
+//* FILTRO CON AGGREGATE AQUI.
+//? status pending, sex male, order by firstName
 module.exports.listUsers = async (req, res) => {
 	try {
 		const users = await User.find({});
@@ -44,29 +45,35 @@ module.exports.updateUser = async (req, res) => {
 			return res.status(404).send({ error: 'User does not exists' });
 		}
 
+		const forbiddenData = ['_id', "__v", "createdAt", "updatedAt"];
 		const updatedData = Object.keys(user._doc).reduce((diff, key) => {
-			if ((user[key] !== req.body[key]) && req.body[key] && user[key] && (key !== 'password')) {
+			if ((user[key] !== req.body[key]) && req.body[key] && user[key] && !forbiddenData.includes(key)) {
 				diff[key] = req.body[key];
 			}
 			return diff;
 		}, {});
 
-		// if dni or phoneNumber is changed, check that it is not registered already
-		if ((updatedData.dni || updatedData.phoneNumber)) {
-			const userExists = await User.findOne({
-				$or: [
-					{ dni: updatedData.dni },
-					{ phoneNumber: updatedData.phoneNumber }
-				]
-			});
+		if (Object.keys(updatedData).length !== 0) {
+			// if dni or phoneNumber is changed, check that it is not registered already
+			if ((updatedData.dni || updatedData.phoneNumber)) {
+				const userExists = await User.findOne({
+					$or: [
+						{ dni: updatedData.dni },
+						{ phoneNumber: updatedData.phoneNumber }
+					]
+				});
 
-			if (userExists) {
-				return res.status(409).send({ error: 'User with given credentials already exists' });
+				if (userExists) {
+					return res.status(409).send({ error: 'User with given credentials already exists' });
+				}
 			}
+
+			user = await User.findByIdAndUpdate({ _id: req.params.id }, updatedData, { new: true, runValidators: true });
+			return res.status(200).send(user);
+		} else {
+			return res.status(204).end();
 		}
 
-		user = await User.findByIdAndUpdate({ _id: req.params.id }, updatedData, { new: true, runValidators: true });
-		return res.status(200).send(user);
 	} catch (error) {
 		console.log(error);
 		return res.status(500).send({ error: error.message });
