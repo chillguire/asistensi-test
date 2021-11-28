@@ -31,6 +31,9 @@ app.use(express.json());
 const authRoutes = require('./routes/auth');
 app.use('/api/', authRoutes);
 
+const userRoutes = require('./routes/users');
+app.use('/api/users', userRoutes);
+
 app.all('*', isLoggedIn, (req, res) => {
 	res.sendStatus(404);
 });

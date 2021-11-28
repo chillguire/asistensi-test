@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 
 
 module.exports.create = async (req, res) => {
-	//* hacer validaciones en dni, phone y nombres - trim whitespace, only allow numbers else throw error, que se yo
 	const { dni, phoneNumber, password, firstName, lastName, sex, status } = req.body;
 	const payload = {
 		service: 'Create user/Register',
@@ -41,20 +40,22 @@ module.exports.create = async (req, res) => {
 		});
 		await user.save();
 
-		const token = jwt.sign(
-			{
-				id: user._id,
-			},
-			process.env.SECRET || 'uwu',
-			{
-				expiresIn: '7d',
-			},
-		);
+		if (!req.user) {
+			const token = jwt.sign(
+				{
+					id: user._id,
+				},
+				process.env.SECRET || 'uwu',
+				{
+					expiresIn: '7d',
+				},
+			);
 
-		return res.status(201).send({
-			id: user._id,
-			token,
-		});
+			payload.token = token;
+		}
+
+		payload.id = user._id;
+		return res.status(201).send(payload);
 	} catch (error) {
 		payload.error = error.message;
 
