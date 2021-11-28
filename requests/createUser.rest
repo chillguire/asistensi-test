@@ -1,10 +1,10 @@
-POST http://localhost:3000/api/users
+POST https://arcane-reaches-20829.herokuapp.com/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTNhY2IxODA0MjJmZTYzOTY5OTM0MiIsImlhdCI6MTYzODExNzM5NSwiZXhwIjoxNjM4NzIyMTk1fQ.PLAAKdf7YQE_t0m_SU1AyrqSovK1BpTRakPEnsRBFUo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTNlZDUzYTVkNDEyNDdjOWQ0YmQ4YiIsImlhdCI6MTYzODEzMzE2MiwiZXhwIjoxNjM4NzM3OTYyfQ.g26jSa-jUsHbIifqR-Tfw9Bksth5Z0oNKSVMzKvFg_E
 
 {
-    "dni": "12345678C", 
-	"phoneNumber": "12345678", 
+    "dni": "12345678B", 
+	"phoneNumber": "123456788", 
 	"password": "1",
 	"firstName": "John",
 	"lastName": "Doe"

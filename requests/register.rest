@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/register
+POST https://arcane-reaches-20829.herokuapp.com/api/register
 Content-Type: application/json
 
 {
