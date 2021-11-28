@@ -7,6 +7,7 @@ const http = require('http').Server(app);
 const mongoose = require('mongoose');
 
 const { isLoggedIn } = require('./middleware/middleware');
+const AppError = require('./middleware/AppError');
 
 
 //** DB CONFIG
@@ -37,7 +38,15 @@ const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes);
 
 app.all('*', isLoggedIn, (req, res) => {
-	res.sendStatus(404);
+	throw new AppError(404, 'Page not found');
+});
+
+
+//** ERROR HANDLING
+app.use((error, req, res, next) => {
+	console.log(error);
+	const { status = 500, message = 'Something went wrong' } = error;
+	res.status(status).send({ error: message });
 });
 
 
