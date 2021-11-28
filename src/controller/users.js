@@ -1,10 +1,23 @@
 const User = require('../models/user');
 
-//* FILTRO CON AGGREGATE AQUI.
-//? status pending, sex male, order by firstName
+
 module.exports.listUsers = async (req, res) => {
 	try {
-		const users = await User.find({});
+		let users;
+		if (req.query.hasOwnProperty('sex') || req.query.hasOwnProperty('status')) {
+			const sexList = ['Male', 'Female', 'Other'];
+			const statusList = ['Active', 'Inactive', 'Pending'];
+			const sex = (sexList.includes(req.query.sex)) ? req.query.sex : 'Male';
+			const status = (statusList.includes(req.query.status)) ? req.query.status : 'Pending';
+
+			users = await User.aggregate([
+				{ $match: { sex, status } },
+				{ $sort: { firstName: 1, lastName: 1 } }
+			]);
+		} else {
+			users = await User.find({});
+		}
+
 		return res.status(200).send(users);
 	} catch (error) {
 		console.log(error);
@@ -53,7 +66,7 @@ module.exports.updateUser = async (req, res) => {
 			return diff;
 		}, {});
 
-		if (Object.keys(updatedData).length !== 0) {
+		if (Object.keys(updatedData).length > 0) {
 			// if dni or phoneNumber is changed, check that it is not registered already
 			if ((updatedData.dni || updatedData.phoneNumber)) {
 				const userExists = await User.findOne({

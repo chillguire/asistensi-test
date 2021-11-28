@@ -1,11 +1,7 @@
-PUT http://localhost:3000/api/users/61a36dc45289b1df0b563bd6
+PUT http://localhost:3000/api/users/61a3948cf5255eb870aa34ec
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYTJhM2IyZDM4N2MzNzYyOTRiMDhhYyIsImlhdCI6MTYzODA0ODY5MCwiZXhwIjoxNjM4NjUzNDkwfQ.RFyzZmQAcyBTuNEqJL6Q1T2wzq7OFjiFs5uUhUuMhrc
 
 {
-    "dni": "test125",
-	"phoneNumber": "12345", 
-	"password": "1234567",
-	"firstName": "RicardoO152",
-	"lastName": "Avenda5ño",
+    "status": "Pending"
 }
