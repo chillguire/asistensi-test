@@ -3,9 +3,11 @@ const router = express.Router();
 
 const auth = require('../controller/auth');
 
+const { validateBody } = require('../middleware/middleware');
+
 
 router.route('/register')
-	.post(auth.create);
+	.post(validateBody, auth.create);
 
 router.route('/login')
 	.post(auth.login);

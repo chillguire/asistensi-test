@@ -2,9 +2,10 @@ POST http://localhost:3000/api/register
 Content-Type: application/json
 
 {
-    "dni": "12345678A", 
-	"phoneNumber": "123", 
+    "dni": "12345678B", 
+	"phoneNumber": "1234", 
 	"password": "123456",
-	"firstName": "Ricardo",
-	"lastName": "Avendaño"
+	"firstName": "John",
+	"lastName": "Doe",
+	"sex": "Male"
 }

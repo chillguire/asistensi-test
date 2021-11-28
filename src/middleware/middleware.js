@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { isValidObjectId } = require('mongoose');
+const Joi = require('joi');
 
 const AppError = require('../middleware/AppError');
 
@@ -24,6 +25,24 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.isValidId = (req, res, next) => {
 	if (!isValidObjectId(req.params.id)) {
 		throw new AppError(400, 'Bad request');
+	}
+	next();
+};
+
+const userSchema = Joi.object({
+	firstName: Joi.string().alphanum().min(3).max(30).trim(),
+	lastName: Joi.string().alphanum().min(3).max(30).trim(),
+	dni: Joi.string().length(9).pattern(new RegExp('^[0-9]{8,8}[A-Za-z]$')),
+	phoneNumber: Joi.string().max(15).pattern(/^[0-9]+$/),
+	password: Joi.string().alphanum().min(1),
+	sex: Joi.string().valid('Male', 'Female', 'Other'),
+	status: Joi.string().valid('Active', 'Inactive', 'Pending'),
+});
+module.exports.validateBody = (req, res, next) => {
+	const { error } = userSchema.validate(req.body, { abortEarly: false });
+	if (error) {
+		const messages = error.details.map(element => element.message).join(', ');
+		throw new AppError(400, messages);
 	}
 	next();
 };
