@@ -10,7 +10,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 		return res.status(401).send({ error: 'Not authorized' });
 	}
 
-	jwt.verify(token, process.env.SECRET || 'uwu', (error, user) => {
+	jwt.verify(token, process.env.SECRET, (error, user) => {
 		if (error) {
 			return res.status(401).send({ error: 'Not authorized' });
 		}

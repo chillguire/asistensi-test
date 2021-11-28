@@ -136,7 +136,21 @@ Examples:
 */
 
 const vowelCount = (string) => {
+	const vowels = 'aeiou';
 
+	return [...string].reduce((accumulator, element) => {
+		const lowerCaseElement = element.toLowerCase();
+
+		if (vowels.indexOf(lowerCaseElement) !== -1) {
+			if (accumulator[lowerCaseElement]) {
+				accumulator[lowerCaseElement]++;
+			} else {
+				accumulator[lowerCaseElement] = 1;
+			}
+		}
+
+		return accumulator;
+	}, {});
 };
 
 /*
@@ -148,7 +162,7 @@ Examples:
 */
 
 const hasNoDuplicates = (array = []) => {
-
+	return (new Set(array)).size === array.length;
 };
 
 /*
@@ -166,7 +180,8 @@ Examples:
 */
 
 const addKeyAndValue = (array = [], key, value) => {
-
+	array.map((element) => element[key] = value);
+	return array;
 };
 
 /*
@@ -186,7 +201,12 @@ Examples:
 */
 
 const partition = (array = [], callback) => {
+	return array.reduce((accumulator, element) => {
+		const isValid = callback(element);
+		(isValid) ? accumulator[0].push(element) : accumulator[1].push(element);
 
+		return accumulator;
+	}, [[], []]);
 };
 
 /*

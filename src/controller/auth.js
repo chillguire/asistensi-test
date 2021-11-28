@@ -45,7 +45,7 @@ module.exports.create = async (req, res) => {
 				{
 					id: user._id,
 				},
-				process.env.SECRET || 'uwu',
+				process.env.SECRET,
 				{
 					expiresIn: '7d',
 				},
@@ -95,7 +95,7 @@ module.exports.login = async (req, res) => {
 			{
 				id: user._id,
 			},
-			process.env.SECRET || 'uwu',
+			process.env.SECRET,
 			{
 				expiresIn: '7d',
 			},
